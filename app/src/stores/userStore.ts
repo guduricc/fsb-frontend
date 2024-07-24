@@ -108,7 +108,7 @@ export const useUserStore = defineStore('userStore', {
           if(index !== -1){
             this.userUnavailability.splice(index,1)
           }
-          useNotificationMessage('success','Uspešno obrisana dostupnost!')
+          useNotificationMessage('success','Uspešno obrisana nedostupnost!')
         })
     },
 
