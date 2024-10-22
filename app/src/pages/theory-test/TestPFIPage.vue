@@ -2,7 +2,7 @@
   <q-page v-if="activeTestExist" padding>
     <q-card>
       <q-card-section>
-        <BaseHeader icon="quiz" title="TEST PRAVILA FUDBALSKE IGRE"></BaseHeader>
+        <BaseHeader icon="quiz" title="LAWS OF THE GAME TEST"></BaseHeader>
       </q-card-section>
       <q-separator inset/>
       <q-card-section>
@@ -12,7 +12,7 @@
                            v-for="(question, index) in questions" :key="question"
           >
             <div style="width: 100%">
-              <span class="text-h6 text-primary" style="margin-bottom: 122px">{{index+1 + '. Pitanje'}}</span>
+              <span class="text-h6 text-primary" style="margin-bottom: 122px">{{index+1 + '. Qusetion'}}</span>
               <q-item>
                 <span style="margin: 10px 0; width: 100%; font-size: 16px;" class="text-bold">
                 {{question.question_text}}
@@ -34,7 +34,7 @@
       </q-card-section>
       <q-card-section style="display: flex; justify-content: space-between">
         <div></div>
-        <q-btn size='lg' class="q-ma-md" rounded color="primary" label="Pošalji test" @click="submit"/>
+        <q-btn size='lg' class="q-ma-md" rounded color="primary" label="Send test" @click="submit"/>
 
       </q-card-section>
     </q-card>
@@ -48,11 +48,11 @@
       </q-card-section>
       <q-card-section style="align-self: center; display: flex; flex-direction: column">
         <q-card-section class="text-center text-bold" style="font-size: 16px">
-          Trenutno ne postoji aktivan test!
-          Pokušajte ponovo kasnije.
+          There is no active test available.
+          Please try again later.
         </q-card-section>
         <q-card-actions style="align-self: center;">
-          <q-btn @click="reloadPage" rounded label="Pokušaj ponovo" color="primary"></q-btn>
+          <q-btn @click="reloadPage" rounded label="Try again" color="primary"></q-btn>
         </q-card-actions>
       </q-card-section>
     </q-card>
@@ -128,7 +128,7 @@ function validationSuccessful(){
   });
 
   if(index !== -1){
-    useNotificationMessage('error','Za pitanje broj ' + Number(Number(index)+1) + ' nije obeležen odgovor!');
+    useNotificationMessage('error','For question ' + Number(Number(index)+1) + ', the answer is not marked!');
     return false;
   }
 
@@ -138,8 +138,8 @@ function validationSuccessful(){
 
 function submitTest(testAnswers: { answer: string }[]){
   $q.dialog({
-    title: 'Slanje testa',
-    message: 'Ukoliko pošaljete test više nećete biti u mogućnosti da promenite odgovore.',
+    title: 'Sending test',
+    message: 'Once you submit the test, you will no longer be able to change your answers.',
     persistent: true,
     ok: {
       push: true,

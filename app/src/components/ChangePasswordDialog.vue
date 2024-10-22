@@ -4,7 +4,7 @@
   <q-card-section class="bg-primary text-white text-h5">
     <q-item style="display: flex; justify-content: space-between">
       <q-item-label>
-        Promena lozinke
+        Change password
       </q-item-label>
       <q-btn style="margin-left: 50px" flat round dense icon="close" v-close-popup color="white"/>
     </q-item>
@@ -13,36 +13,36 @@
       <q-form @submit='onSubmit'>
         <BaseInput
           v-model.trim='oldPassword'
-          label='Stara lozinka'
-          hint='Unesite staru lozinku'
+          label='Old password'
+          hint='Enter your old password'
           :password-input="true"
-          :rules="[ val => val && val.length >= 5 || 'Ovo polje je obavezno i mora imati najmanje 5 karaktera!']"
+          :rules="[ val => val && val.length >= 5 || 'This field is required and must have at least 5 characters!']"
           :type="oldPasswordInputType"
           @toggle-password="isPwdOld = !isPwdOld"
           style="margin-bottom: 15px"
         />
         <BaseInput
           v-model.trim='password'
-          label='Nova lozinka'
-          hint='Unesite novu lozinku'
+          label='New password'
+          hint='Enter your new password'
           :password-input="true"
-          :rules="[ val => val && val.length >= 5 || 'Ovo polje je obavezno i mora imati najmanje 5 karaktera!']"
+          :rules="[ val => val && val.length >= 5 || 'This field is required and must have at least 5 characters!']"
           :type="passwordInputType"
           @toggle-password="isPwd = !isPwd"
           style="margin-bottom: 30px"
         />
         <BaseInput
           v-model.trim='passwordConfirmation'
-          label='Potvrda nove lozinke'
-          hint='Potvrdite unetu lozinku'
+          label='Confirm new password'
+          hint='Confirm the entered password'
           :password-input="true"
-          :rules="[ val => val && val.length >= 5 || 'Ovo polje je obavezno i mora imati najmanje 5 karaktera!', isConfirmed]"
+          :rules="[ val => val && val.length >= 5 || 'This field is required and must have at least 5 characters!', isConfirmed]"
           :type="passwordInputTypeConfirm"
           @toggle-password="isPwdConfirm = !isPwdConfirm"
           style="margin-bottom: 30px"
 
         />
-        <q-btn label="Promeni lozinku" type="submit" color="primary"  style="width: 100%; margin-top: 15px"/>
+        <q-btn label="Change password" type="submit" color="primary"  style="width: 100%; margin-top: 15px"/>
       </q-form>
     </q-card-section>
   </q-card>
@@ -83,7 +83,7 @@ const passwordInputTypeConfirm = computed(function (){
 
 
 function isConfirmed(val: string) {
-  return val === password.value || 'Potvrda lozinke se ne podudara sa unetom lozinkom';
+  return val === password.value || 'Password confirmation does not match the entered password.';
 }
 
 async function onSubmit(){
@@ -94,7 +94,7 @@ async function onSubmit(){
   }
 
   if(password.value !== passwordConfirmation.value){
-    useNotificationMessage('error','Lozinke se moraju podudarati!');
+    useNotificationMessage('error','Passwords must match!');
     return;
   }
 

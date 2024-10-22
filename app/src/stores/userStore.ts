@@ -40,7 +40,7 @@ export const useUserStore = defineStore('userStore', {
           if(request.role === 'USER'){
             this.users.unshift(response.data);
           }
-          useNotificationMessage('success','Uspešno kreiran korisnik!')
+          useNotificationMessage('success','User created successfully!')
         })
 
     },
@@ -52,7 +52,7 @@ export const useUserStore = defineStore('userStore', {
           if(index !== -1){
             this.users[index] = response.data;
           }
-          useNotificationMessage('success','Uspešno ažuriran korisnik!')
+          useNotificationMessage('success','User updated successfully!')
         })
     },
 
@@ -60,7 +60,7 @@ export const useUserStore = defineStore('userStore', {
       await api
         .patch('/user/change-user-password',changePasswordRequest)
         .then((response)=>{
-          useNotificationMessage('success','Uspešno promenjena lozinka!')
+          useNotificationMessage('success','Password changed successfully!')
         })
     },
 
@@ -72,7 +72,7 @@ export const useUserStore = defineStore('userStore', {
           if(index !== -1){
             this.users.splice(index,1)
           }
-          useNotificationMessage('success','Uspešno obrisan korisnik!')
+          useNotificationMessage('success','User deleted successfully!')
         })
     },
 
@@ -83,7 +83,7 @@ export const useUserStore = defineStore('userStore', {
           console.log(response.data)
           this.userUnavailability.push(...response.data);
           this.userUnavailability.sort((a, b) => new Date(a.date) - new Date(b.date))
-          useNotificationMessage('success','Uspešno dodata nedostupnost!')
+          useNotificationMessage('success','Unavailability successfully created!')
         })
     },
 
@@ -108,21 +108,21 @@ export const useUserStore = defineStore('userStore', {
           if(index !== -1){
             this.userUnavailability.splice(index,1)
           }
-          useNotificationMessage('success','Uspešno obrisana nedostupnost!')
+          useNotificationMessage('success','Unavailability successfully deleted!')
         })
     },
 
-    async downloadUnavailabilityExcel(){
-      try {
-        const url ='/unavailability/export-unavailabilities'
-        await useDownloadExcel(url, {}, 'nedostupnosti - ' + useCurrentDate());
-
-      } catch (error: any) {
-        if (error.response && error.response.status === 404) {
-          useNotificationMessage('error','Nema rezultata!')
-        }
-      }
-    }
+    // async downloadUnavailabilityExcel(){
+    //   try {
+    //     const url ='/unavailability/export-unavailabilities'
+    //     await useDownloadExcel(url, {}, 'nedostupnosti - ' + useCurrentDate());
+    //
+    //   } catch (error: any) {
+    //     if (error.response && error.response.status === 404) {
+    //       useNotificationMessage('error','No results!')
+    //     }
+    //   }
+    // }
     // async getAvailabilitiesApi(){
     //   await api
     //     .get('/availabilities', )

@@ -1,32 +1,32 @@
 <template>
   <q-page class="row items-center justify-evenly">
     <div style="display: flex; justify-content: space-evenly; flex-wrap: wrap; width: 100%">
-      <q-btn class="bg-primary text-white q-pa-md" style="margin-top: 50px" label="Započni test PFI"
+      <q-btn class="bg-primary text-white q-pa-md" style="margin-top: 50px" label="Start theory test"
              icon="quiz" rounded @click="openTestPFIPage"/>
-      <q-btn class="bg-primary text-white q-pa-md" style="margin-top: 50px" label="Započni video test"
+      <q-btn class="bg-primary text-white q-pa-md" style="margin-top: 50px" label="Start video test"
              icon="play_circle" rounded @click="openVideoTestPage"/>
     </div>
     <div>
       <q-card style="min-width: 350px" class="bg-blue-grey-1">
         <q-card-section style="display: flex; justify-content: space-between; padding-top: 0; padding-bottom: 0" >
-          <q-card-section  class="text-h6 text-primary"> Profil</q-card-section>
+          <q-card-section  class="text-h6 text-primary"> Profile</q-card-section>
           <div style="align-self: center">
             <q-btn size="sm" class="q-ma-sm bg-orange text-white" round icon="edit" @click="toggleUserCreationDialog">
-            <BaseTooltip class="bg-orange" tooltip="Ažuriraj podatke"/>
+            <BaseTooltip class="bg-orange" tooltip="Update data"/>
             </q-btn>
             <q-btn size="sm" class="q-ma-sm bg-red text-white" round icon="lock" @click="openChangePasswordDialog">
-              <BaseTooltip class="bg-red" tooltip="Promena lozinke"/>
+              <BaseTooltip class="bg-red" tooltip="Change password"/>
             </q-btn>
 <!--            <q-btn size="sm" class="q-ma-sm bg-primary text-white" round icon="image">-->
 <!--              <BaseTooltip class="bg-primary" tooltip="Postavljanje fotografije"/>-->
 <!--            </q-btn>-->
-            <q-btn size="sm" class="q-ma-sm bg-primary text-white" round icon="event_busy" @click="openAvailabilityDialog">
-              <BaseTooltip class="bg-primary" tooltip="Nedostupnost"/>
-            </q-btn>
-            <q-btn size="sm" class="q-ma-sm bg-teal-9 text-white" round icon="download" @click="downloadUnavailabilityExcel"
-                   v-if="useAuthenticatedUserStore().getUser.role === 'FSB ADMIN'">
-              <BaseTooltip class="bg-teal-9" tooltip="Preuzmi nedostupnosti"/>
-            </q-btn>
+<!--            <q-btn size="sm" class="q-ma-sm bg-primary text-white" round icon="event_busy" @click="openAvailabilityDialog">-->
+<!--              <BaseTooltip class="bg-primary" tooltip="Nedostupnost"/>-->
+<!--            </q-btn>-->
+<!--            <q-btn size="sm" class="q-ma-sm bg-teal-9 text-white" round icon="download" @click="downloadUnavailabilityExcel"-->
+<!--                   v-if="useAuthenticatedUserStore().getUser.role === 'ADMIN'">-->
+<!--              <BaseTooltip class="bg-teal-9" tooltip="Preuzmi nedostupnosti"/>-->
+<!--            </q-btn>-->
           </div>
         </q-card-section>
         <q-separator inset/>
@@ -58,14 +58,12 @@
 
 <script setup lang="ts">
 import {useAuthenticatedUserStore} from "stores/authUserStore";
-import {useUIFormat} from "src/utils/dateHook";
 import {computed, ref} from "vue";
 import ChangePasswordDialog from 'src/components/ChangePasswordDialog.vue'
 import UserCreateDialog from 'src/components/UserCreateDialog.vue'
 import BaseTooltip from 'src/components/BaseTooltip.vue'
 import {useRouter} from "vue-router";
 import AvailabilityDialog from "components/AvailabilityDialog.vue";
-import {useUserStore} from "stores/userStore";
 
 const authUserStore = useAuthenticatedUserStore();
 const router = useRouter();
@@ -83,9 +81,9 @@ function openChangePasswordDialog(){
 
 const availabilityDialogIsVisible = ref(false);
 
-function openAvailabilityDialog(){
-  availabilityDialogIsVisible.value = true
-}
+// function openAvailabilityDialog(){
+//   availabilityDialogIsVisible.value = true
+// }
 
 const isCreateUserDialogVisible = ref(false);
 
@@ -105,7 +103,7 @@ function openVideoTestPage(){
   });
 }
 
-async function downloadUnavailabilityExcel(){
-  await useUserStore().downloadUnavailabilityExcel();
-}
+// async function downloadUnavailabilityExcel(){
+//   await useUserStore().downloadUnavailabilityExcel();
+// }
 </script>

@@ -2,20 +2,20 @@
   <q-page padding>
     <q-card>
       <q-card-section>
-        <BaseHeader icon="quiz" title="Kreiranje testa PFI"></BaseHeader>
+        <BaseHeader icon="quiz" title="Theory test creation"></BaseHeader>
       </q-card-section>
       <q-separator inset/>
       <q-card-section>
               <q-card class="q-pa-md" >
                 <div style="display: flex; justify-content: flex-start; flex-wrap: wrap;">
                 <q-card-section style="min-width: 300px">
-                  <q-select style="max-width: 400px" filled v-model="league" multiple :options="leagueOptions" label="Liga" hint="Izaberite ligu za koju se kreira test" />
+                  <q-select style="max-width: 400px" filled v-model="league" multiple :options="leagueOptions" label="League" hint="Select the league for which the test is being created" />
                 </q-card-section>
                   <q-card-section style="min-width: 300px">
-                    <q-select style="max-width: 400px" filled v-model="refereeType" multiple :options="refereeTypeOptions" label="Lista" hint="Izaberite listu za koju se kreira test" />
+                    <q-select style="max-width: 400px" filled v-model="refereeType" multiple :options="refereeTypeOptions" label="Referee type" hint="Select referee type for which the test is being created" />
                   </q-card-section>
                 <q-card-section style="min-width: 300px">
-                  <q-input filled v-model="date" hint="Izaberite datum održavanja testa"  readonly>
+                  <q-input filled v-model="date" hint="Select the test date"  readonly>
                     <template v-slot:append>
                       <q-icon name="event" class="cursor-pointer" color="primary">
                         <q-popup-proxy cover transition-show="scale" transition-hide="scale" >
@@ -30,7 +30,7 @@
                   </q-input>
                 </q-card-section>
                 <q-card-section style="min-width: 300px">
-                  <q-input filled v-model="startTime" mask="time" :rules="['time']" hint="Izaberite vreme održavanja testa" readonly>
+                  <q-input filled v-model="startTime" mask="time" :rules="['time']" hint="Select the test start time" readonly>
                     <template v-slot:append>
                       <q-icon name="access_time" class="cursor-pointer" color="green">
                         <q-popup-proxy cover transition-show="scale" transition-hide="scale">
@@ -45,7 +45,7 @@
                   </q-input>
                 </q-card-section>
                   <q-card-section style="min-width: 300px">
-                    <q-input filled v-model="endTime" mask="time" :rules="['time']" hint="Izaberite vreme završetka testa" readonly>
+                    <q-input filled v-model="endTime" mask="time" :rules="['time']" hint="Select the test end time" readonly>
                       <template v-slot:append>
                         <q-icon name="access_time" class="cursor-pointer" color="red">
                           <q-popup-proxy cover transition-show="scale" transition-hide="scale">
@@ -68,14 +68,14 @@
                   v-for="(question, index) in questions" :key="question"
                 >
                   <div style="width: 100%">
-                  <span class="text-h6" style="margin-bottom: 122px">{{index+1 + '. Pitanje'}}</span>
+                  <span class="text-h6" style="margin-bottom: 122px">{{index+1 + '. Qusetion'}}</span>
                   <q-input
                     style="margin: 10px 0; width: 100%"
                     filled
                     v-model="question.question_text"
-                    label="Pitanje"
+                    label="Question"
                     lazy-rules
-                    :rules="[ val => val && val.length > 0 || 'Ovo polje ne sme biti prazno!']"
+                    :rules="[ val => val && val.length > 0 || 'This field cannot be empty!']"
                     dense
                     type="textarea"
                   />
@@ -87,7 +87,7 @@
                           style="width: 100%"
                           filled
                           v-model.trim="answers.answer_text"
-                          :label="`Ponuđeni odgovor ${index2+1}`"
+                          :label="`Offered answer ${index2+1}`"
                           lazy-rules
                           hint=""
                           type="text"
@@ -102,7 +102,7 @@
                   </div>
                   <div style="display: flex; justify-content: space-between">
                     <div></div>
-                    <q-btn :disable="questions.length===1" class="q-ma-md" rounded color="red" label="Obriši pitanje" @click="deleteQuestion(index)"/>
+                    <q-btn :disable="questions.length===1" class="q-ma-md" rounded color="red" label="Delete question" @click="deleteQuestion(index)"/>
                   </div>
                 </q-card-section>
                 <div style="display: flex; justify-content: center">
@@ -113,7 +113,7 @@
       </q-card-section>
       <q-card-section style="display: flex; justify-content: space-between">
         <div></div>
-        <q-btn size='lg' class="q-ma-md" rounded color="primary" label="Sačuvaj test" @click="submit"/>
+        <q-btn size='lg' class="q-ma-md" rounded color="primary" label="Save test" @click="submit"/>
 
       </q-card-section>
     </q-card>
@@ -136,10 +136,10 @@ let date = ref(useCurrentDate());
 let startTime = ref('10:00');
 let endTime = ref('11:00');
 
-const leagueOptions = ['MLADJE KATEGORIJE','MEDJUOPSTINSKA LIGA','PRVA BEOGRADSKA LIGA', 'ZONSKA LIGA','SRPSKA LIGA','PRVA LIGA SRBIJE', 'SUPER LIGA SRBIJE'];
+const leagueOptions = ['FIRST LEAGUE','SECOND LEAGUE','THIRD LEAGUE'];
 let league = ref<string[]>([]);
 
-const refereeTypeOptions = ['SUDIJA', 'POMOĆNI SUDIJA','DELEGAT'];
+const refereeTypeOptions = ['REFEREE', 'ASSISTANT REFEREE','DELEGATE'];
 let refereeType = ref<string[]>([]);
 
 let questions = ref([
@@ -278,24 +278,24 @@ async function submit(){
 function validationSuccessful(){
 
   if(endTime.value <= startTime.value){
-    useNotificationMessage('error','Vreme završetka testa mora biti veće od vremena početka testa!');
+    useNotificationMessage('error','The test end time must be later than the test start time!');
     return false;
   }
 
   if(!league.value || league.value.length === 0){
-    useNotificationMessage('error','Niste uneli ligu!');
+    useNotificationMessage('error','You have not entered the league!');
     return false;
   }
 
   if(!refereeType.value ||  league.value.length === 0){
-    useNotificationMessage('error','Niste uneli Listu!');
+    useNotificationMessage('error','You have not entered the referee type!');
     return false;
   }
 
   //empty question exists
   const index = questions.value.findIndex(el => el.question_text === '');
   if(index !== -1){
-    useNotificationMessage('error','Pitanje broj ' + Number(Number(index)+1) + ' je prazno!');
+    useNotificationMessage('error','Question number ' + Number(Number(index)+1) + ' is empty!');
     return false;
   }
 
@@ -308,20 +308,10 @@ function validationSuccessful(){
     return nonEmptyAnswers.length < 2
   })
   if(index4 !== -1){
-    useNotificationMessage('error','Za pitanje broj ' + Number(Number(index4)+1) + ' morate uneti najmanje 2 odgovora!');
+    useNotificationMessage('error','For question number ' + Number(Number(index4)+1) + ' you must enter at least 2 answers!');
     return false;
   }
 
-  // empty answers exist
-
-  // const index2 = questions.value.findIndex(el => {
-  //   return el.answers.every(answer => answer.answer_text === '');
-  // })
-  //
-  // if(index2 !== -1){
-  //   useNotificationMessage('error','Za pitanje broj ' + Number(Number(index2)+1) + ' nisu uneti svi ponuđeni odgovori!');
-  //   return false;
-  // }
 
   // validation for answers passed
 
@@ -330,7 +320,7 @@ function validationSuccessful(){
   });
 
   if(index3 !== -1){
-    useNotificationMessage('error','Za pitanje broj ' + Number(Number(index3)+1) + ' nije obeležen tačan odgovor!');
+    useNotificationMessage('error','The correct answer is not marked for question number ' + Number(Number(index3)+1) + '!');
     return false;
   }
 

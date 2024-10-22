@@ -11,7 +11,7 @@
           </q-item-section>
       </q-item>
         <q-btn dense round class="bg-green text-white" icon="add" @click="openAddVideoDialog">
-          <BaseTooltip class="bg-green" tooltip="Dodaj novo pitanje"/>
+          <BaseTooltip class="bg-green" tooltip="Add new question"/>
         </q-btn>
       </q-card-section>
       <q-separator inset style="margin-bottom: 10px"/>
@@ -20,7 +20,7 @@
         style="border-radius: 20px; margin-bottom: 10px"
         v-for="answers in videoTest.answers" :key="answers">
         <div style="display: flex; justify-content: space-between">
-          <span class="text-h6" >{{answers.order_id + '. Pitanje'}}</span>
+          <span class="text-h6" >{{answers.order_id + '. Question'}}</span>
           <q-btn style="align-self:flex-start" icon="edit" round class="bg-orange text-white" @click="openUpdateVideoDialog(answers.order_id)"></q-btn>
         </div>
         <q-item style="display: flex; justify-content: center; margin-bottom: 20px">
@@ -36,9 +36,9 @@
               style="width: 100%"
               filled
               v-model="answer.answer_text"
-              :label="`Ponuđeni odgovor ${index+1}`"
+              :label="`Offered answer ${index+1}`"
               lazy-rules
-              :rules="[ val => val && val.length > 0 || 'Ovo polje ne sme biti prazno!']"
+              :rules="[ val => val && val.length > 0 || 'This field cannot be empty!']"
               type="text"
             />
           </q-item-section>
@@ -62,7 +62,7 @@
       </q-card-section>
       <q-card-section style="max-width: 400px; margin: 15px">
         <q-file dense outlined color="primary" filled v-model="video"
-                hint="Uploaduj video sa svog uređaja" accept=".mp4, .mov">
+                hint="Upload a video from your device." accept=".mp4, .mov">
           <template v-slot:append>
             <q-icon name="cloud_upload" color="primary"/>
           </template>
@@ -76,7 +76,7 @@
               style="width: 100%"
               filled
               v-model.trim="answer.answer_text"
-              :label="`Ponuđeni odgovor ${index+1}`"
+              :label="`Offered answer ${index+1}`"
               lazy-rules
               hint=""
               type="text"
@@ -89,7 +89,7 @@
         </q-item>
       </q-card-section>
       <q-card-section>
-        <q-btn  @click="saveQuestion" label="Sačuvaj pitanje" rounded class="bg-green text-white"/>
+        <q-btn  @click="saveQuestion" label="Save question" rounded class="bg-green text-white"/>
       </q-card-section>
     </q-card>
   </q-dialog>
@@ -123,7 +123,7 @@ function getVideoUrl(orderId: number){
 }
 
 const addVideoDialogIsVisible = ref(false)
-const dialogTitle = ref('Novo pitanje')
+const dialogTitle = ref('New question')
 const questionOrderId = ref(0)
 
 
@@ -137,7 +137,7 @@ function openAddVideoDialog(){
     {answer_text: '',is_correct: false},
     {answer_text: '',is_correct: false}
   ]
-  dialogTitle.value = 'Novo pitanje'
+  dialogTitle.value = 'New question'
   questionOrderId.value = videoTest.value.answers ? videoTest.value.answers.length + 1 : 1;
 }
 
@@ -148,7 +148,7 @@ function openUpdateVideoDialog(orderId: number){
   if(index !== -1){
     answers.value = videoTest.value.answers[index].answers;
   }
-  dialogTitle.value = 'Ažuriranje ' + orderId + '. pitanja'
+  dialogTitle.value = 'Updating question ' + orderId +
   questionOrderId.value = orderId
 }
 
@@ -173,7 +173,7 @@ async function saveQuestion(){
   let nonEmptyAnswers = answers.value.filter(answer =>  answer.answer_text !== '')
 
   if(nonEmptyAnswers.length < 2){
-    useNotificationMessage('error','Morate uneti najmanje 2 odgovora!');
+    useNotificationMessage('error','You must enter at least 2 answers!');
     return false;
   }
 
@@ -182,13 +182,13 @@ async function saveQuestion(){
   });
 
   if(index2 === -1){
-    useNotificationMessage('error','Niste obeležili tačan odgovor!');
+    useNotificationMessage('error','You have not marked the correct answer!');
     return false;
   }
 
-  if(dialogTitle.value === 'Novo pitanje'){
+  if(dialogTitle.value === 'New question'){
     if(!video.value){
-      useNotificationMessage('error','Morate uploadovati video!')
+      useNotificationMessage('error','You must upload a video.!')
       return
     }
 

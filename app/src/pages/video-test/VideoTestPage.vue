@@ -9,7 +9,7 @@
   <q-table dense :rows="videoTests" :columns="columns" row-key="name" >
     <template v-slot:top-left>
       <q-btn class="bg-green text-white" icon="add" round @click="openCreateVideoTestDialog">
-        <BaseTooltip class="bg-green" tooltip="Kreiraj video test"/>
+        <BaseTooltip class="bg-green" tooltip="Create video test"/>
       </q-btn>
     </template>
     <template v-slot:header="props">
@@ -43,7 +43,7 @@
               name="manage_search"
               color="amber-9"
             />
-            <BaseTooltip class="bg-amber-9" tooltip="Detalji testa"/>
+            <BaseTooltip class="bg-amber-9" tooltip="Test details"/>
           </q-btn>
         </q-td>
         <q-td key="questions" :props="props"  class="text-center">
@@ -56,7 +56,7 @@
               name="quiz"
               color="primary"
             />
-            <BaseTooltip class="bg-primary" tooltip="Pitanja testa"/>
+            <BaseTooltip class="bg-primary" tooltip="Test questions"/>
           </q-btn>
         </q-td>
         <q-td key="results" :props="props"  class="text-center">
@@ -69,7 +69,7 @@
               name="query_stats"
               color="green"
             />
-            <BaseTooltip class="bg-green" tooltip="Preuzmi excel sa rezultatima testa"/>
+            <BaseTooltip class="bg-green" tooltip="Download excel with test results"/>
           </q-btn>
         </q-td>
         <q-td key="delete" :props="props"  class="text-center">
@@ -83,7 +83,7 @@
               name="delete"
               color="red"
             />
-            <BaseTooltip class="bg-red" tooltip="Obriši test"/>
+            <BaseTooltip class="bg-red" tooltip="Delete test"/>
           </q-btn>
         </q-td>
       </q-tr>
@@ -99,7 +99,7 @@
         </BaseHeader>
       </q-card-section>
       <q-card-section style="min-width: 300px">
-        <q-input dense filled v-model="date" hint="Izaberite datum održavanja testa"  readonly>
+        <q-input dense filled v-model="date" hint="Select the test date"  readonly>
           <template v-slot:append>
             <q-icon name="event" class="cursor-pointer" color="primary">
               <q-popup-proxy cover transition-show="scale" transition-hide="scale" >
@@ -114,7 +114,7 @@
         </q-input>
       </q-card-section>
       <q-card-section style="min-width: 300px">
-        <q-input dense filled v-model="startTime" mask="time" :rules="['time']" hint="Izaberite vreme održavanja testa" readonly>
+        <q-input dense filled v-model="startTime" mask="time" :rules="['time']" hint="Select the test start time" readonly>
           <template v-slot:append>
             <q-icon name="access_time" class="cursor-pointer" color="green">
               <q-popup-proxy cover transition-show="scale" transition-hide="scale">
@@ -129,7 +129,7 @@
         </q-input>
       </q-card-section>
       <q-card-section style="min-width: 300px">
-        <q-input dense filled v-model="endTime" mask="time" :rules="['time']" hint="Izaberite vreme završetka testa" readonly>
+        <q-input dense filled v-model="endTime" mask="time" :rules="['time']" hint="Select the test end time" readonly>
           <template v-slot:append>
             <q-icon name="access_time" class="cursor-pointer" color="red">
               <q-popup-proxy cover transition-show="scale" transition-hide="scale">
@@ -144,14 +144,14 @@
         </q-input>
       </q-card-section>
         <q-card-section style="min-width: 300px">
-          <q-select dense  style="max-width: 400px" filled v-model="league" multiple :options="leagueOptions" label="Liga" hint="Izaberite ligu za koju se kreira test" />
+          <q-select dense  style="max-width: 400px" filled v-model="league" multiple :options="leagueOptions" label="League" hint="Select the league for which the test is being created" />
         </q-card-section>
         <q-card-section style="min-width: 300px">
-          <q-select dense style="max-width: 400px" filled v-model="refereeType" multiple :options="refereeTypeOptions" label="Lista" hint="Izaberite listu za koju se kreira test" />
+          <q-select dense style="max-width: 400px" filled v-model="refereeType" multiple :options="refereeTypeOptions" label="Referee type" hint="Select referee type for which the test is being created" />
         </q-card-section>
         <q-card-section>
           <q-btn class="bg-blue-grey-8 text-center text-white"
-                 :label="updateTestId === 0 ? 'Kreiraj video test' : 'Ažuriraj video test'"
+                 :label="updateTestId === 0 ? 'Create video test' : 'Update video test'"
                  @click="createVideoTest" rounded/>
         </q-card-section>
     </q-card>
@@ -198,10 +198,10 @@ let date = ref(useCurrentDate());
 let startTime = ref('10:00');
 let endTime = ref('11:00');
 
-const leagueOptions = ['MLADJE KATEGORIJE','MEDJUOPSTINSKA LIGA','PRVA BEOGRADSKA LIGA', 'ZONSKA LIGA','SRPSKA LIGA','PRVA LIGA SRBIJE', 'SUPER LIGA SRBIJE'];
+const leagueOptions = ['FIRST LEAGUE','SECOND LEAGUE','THIRD LEAGUE'];
 let league = ref([]);
 
-const refereeTypeOptions = ['SUDIJA', 'POMOĆNI SUDIJA','DELEGAT'];
+const refereeTypeOptions = ['REFEREE', 'ASSISTANT REFEREE','DELEGATE'];
 let refereeType = ref([]);
 
 const createVideoTestDialogIsVisible = ref(false)
@@ -234,17 +234,17 @@ function openUpdateVideoTestDialog(test: any){
 async function createVideoTest(){
 
   if(endTime.value <= startTime.value){
-    useNotificationMessage('error','Vreme završetka testa mora biti veće od vremena početka testa!');
+    useNotificationMessage('error','The test end time must be later than the test start time!');
     return false;
   }
 
   if(!league.value || league.value.length === 0){
-    useNotificationMessage('error','Niste uneli ligu!');
+    useNotificationMessage('error','You have not entered the league!');
     return false;
   }
 
   if(!refereeType.value ||  league.value.length === 0){
-    useNotificationMessage('error','Niste uneli Listu!');
+    useNotificationMessage('error','You have not entered the referee type!');
     return false;
   }
 
@@ -275,8 +275,8 @@ async function createVideoTest(){
 
 function deleteTest(id: string){
   $q.dialog({
-    title: 'Brisanje testa',
-    message: 'Ukoliko obrišete ovaj test, on će trajno biti izbrisan iz sistema.',
+    title: 'Delete test',
+    message: 'If you delete this test, it will be permanently removed from the system.',
     persistent: true,
     ok: {
       push: true,

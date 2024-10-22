@@ -14,16 +14,16 @@
 
           <BaseInput
             v-model.trim='password'
-            label='Nova lozinka'
-            hint='Unesite novu lozinku'
+            label='New password'
+            hint='Enter your new password'
             :password-input="true"
-            :rules="[ val => val && val.length >= 5 || 'Ovo polje je obavezno i mora imati najmanje 5 karaktera!']"
+            :rules="[ val => val && val.length >= 5 || 'This field is required and must have at least 5 characters!']"
             :type="passwordInputType"
             @toggle-password="isPwd = !isPwd"
             style="margin-bottom: 30px"
           />
 
-          <q-btn label="Promeni lozinku" type="submit" color="primary"  style="width: 100%; margin-top: 15px"/>
+          <q-btn label="Change password" type="submit" color="primary"  style="width: 100%; margin-top: 15px"/>
         </q-form>
       </q-card-section>
     </q-card>

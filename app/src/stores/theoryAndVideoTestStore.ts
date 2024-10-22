@@ -40,7 +40,7 @@ export const useTheoryAndVideoTestStore = defineStore('theoryAndVideoTestStore',
         .post('/theory-test/', request)
         .then((response)=>{
           this.theoryTest.unshift(response.data);
-          useNotificationMessage('success','Uspešno kreiran test!')
+          useNotificationMessage('success','Test created successfully!')
         })
 
     },
@@ -61,7 +61,7 @@ export const useTheoryAndVideoTestStore = defineStore('theoryAndVideoTestStore',
           if(index !== -1){
             this.theoryTest.splice(index,1)
           }
-          useNotificationMessage('success','Uspešno obrisan test!')
+          useNotificationMessage('success','Test deleted successfully!')
         })
     },
 
@@ -91,7 +91,7 @@ export const useTheoryAndVideoTestStore = defineStore('theoryAndVideoTestStore',
       await api
         .patch('/theory-test/'+id, request)
         .then(()=>{
-          useNotificationMessage('success','Uspešno ažuriran test!')
+          useNotificationMessage('success','Test updated successfully!')
         })
     },
 
@@ -110,7 +110,7 @@ export const useTheoryAndVideoTestStore = defineStore('theoryAndVideoTestStore',
         this.activeTestExist = true;
       } catch (error: unknown) {
         if (error instanceof Error) {
-          console.error('Greška prilikom dobijanja aktivnog testa:', error);
+          console.error('Error retrieving the active test:', error);
         } else {
           this.activeTestExist = false;
         }
@@ -144,7 +144,7 @@ export const useTheoryAndVideoTestStore = defineStore('theoryAndVideoTestStore',
         if (error.response && error.response.status === 404) {
           this.activeVideoTestExist = false;
         } else {
-          console.error('Greška prilikom dobijanja aktivnog testa:', error);
+          console.error('Error retrieving the active test:', error);
         }
       }
     },
@@ -190,11 +190,11 @@ export const useTheoryAndVideoTestStore = defineStore('theoryAndVideoTestStore',
 
       try {
         const url ='/theory-test/export-results/'+id;
-        await useDownloadExcel(url, {}, 'rezultati');
+        await useDownloadExcel(url, {}, 'results');
 
       } catch (error: any) {
         if (error.response && error.response.status === 404) {
-          useNotificationMessage('error','Nema rezultata za ovaj test!')
+          useNotificationMessage('error','No results available for this test!')
         }
       }
     },
@@ -202,11 +202,11 @@ export const useTheoryAndVideoTestStore = defineStore('theoryAndVideoTestStore',
     async downloadExcelVideoTest(id: string){
       try {
         const url ='/video-test/export-results/'+id;
-        await useDownloadExcel(url, {}, 'rezultati-video-test');
+        await useDownloadExcel(url, {}, 'results-video-test');
 
       } catch (error: any) {
         if (error.response && error.response.status === 404) {
-          useNotificationMessage('error','Nema rezultata za ovaj video test!')
+          useNotificationMessage('error','No results available for this video test!')
         }
       }
     },
@@ -225,7 +225,7 @@ export const useTheoryAndVideoTestStore = defineStore('theoryAndVideoTestStore',
         .post('/video-test/', request)
         .then((response)=>{
           this.videoTests.unshift(response.data);
-          useNotificationMessage('success','Uspešno kreiran test!')
+          useNotificationMessage('success','Test successfully created!')
         })
 
     },
@@ -237,7 +237,7 @@ export const useTheoryAndVideoTestStore = defineStore('theoryAndVideoTestStore',
           if(index != -1){
             this.videoTests[index] = response.data;
           }
-          useNotificationMessage('success','Uspešno ažuriran test!')
+          useNotificationMessage('success','Test successfully updated!')
         })
     },
 
@@ -249,7 +249,7 @@ export const useTheoryAndVideoTestStore = defineStore('theoryAndVideoTestStore',
           if(index !== -1){
             this.videoTests.splice(index,1)
           }
-          useNotificationMessage('success','Uspešno obrisan test!')
+          useNotificationMessage('success','Test successfully deleted!')
         })
     },
 
@@ -282,7 +282,7 @@ export const useTheoryAndVideoTestStore = defineStore('theoryAndVideoTestStore',
               this.videoTest.answers[index] =  response.data
             }
           }
-          useNotificationMessage('success','Uspešno sačuvano pitanje!')
+          useNotificationMessage('success','Question saved successfully!')
         })
 
     },

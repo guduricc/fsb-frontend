@@ -2,7 +2,7 @@
   <q-page padding>
     <q-card>
       <q-card-section>
-        <BaseHeader icon="list" title="Pregled testova PFI"></BaseHeader>
+        <BaseHeader icon="list" title="Theory tests overview"></BaseHeader>
       </q-card-section>
       <q-separator inset/>
       <q-card-section>
@@ -15,7 +15,7 @@
               borderless
               dense
               debounce="300"
-              placeholder="Pretraga"
+              placeholder="Search"
               v-model="filterTable"
             >
               <template v-slot:append>
@@ -54,7 +54,7 @@
                     name="manage_search"
                     color="amber-9"
                   />
-                  <BaseTooltip class="bg-amber-9" tooltip="Detalji testa"/>
+                  <BaseTooltip class="bg-amber-9" tooltip="Test details"/>
                 </q-btn>
               </q-td>
               <q-td key="results" :props="props"  class="text-center">
@@ -67,7 +67,7 @@
                     name="query_stats"
                     color="green"
                   />
-                  <BaseTooltip class="bg-green" tooltip="Preuzmi excel sa rezultatima testa"/>
+                  <BaseTooltip class="bg-green" tooltip="Download excel with test results"/>
                 </q-btn>
               </q-td>
               <q-td key="delete" :props="props"  class="text-center">
@@ -81,7 +81,7 @@
                     name="delete"
                     color="red"
                   />
-                  <BaseTooltip class="bg-red" tooltip="Obriši test"/>
+                  <BaseTooltip class="bg-red" tooltip="Delete test"/>
                 </q-btn>
               </q-td>
             </q-tr>
@@ -129,8 +129,8 @@ function displayTestLeagues(league: string[]){
 
 function deleteTest(id: string){
   $q.dialog({
-    title: 'Brisanje testa',
-    message: 'Ukoliko obrišete ovaj test, on će trajno biti izbrisan iz sistema.',
+    title: 'Deleting test',
+    message: 'If you delete this test, it will be permanently removed from the system.',
     persistent: true,
     ok: {
       push: true,

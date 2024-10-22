@@ -2,7 +2,7 @@
   <q-dialog persistent ref="userCreationDialog">
     <q-card style="max-width: 800px">
       <q-card-section class="bg-primary text-white my-header">
-        <BaseHeader icon="person_add" :title="props.mode === 'create' ? 'Kreiranje novog korisnika' : props.user.first_name + ' ' + props.user.last_name"></BaseHeader>
+        <BaseHeader icon="person_add" :title="props.mode === 'create' ? 'Creating a new user' : props.user.first_name + ' ' + props.user.last_name"></BaseHeader>
         <q-btn v-close-popup icon="close" color="white" flat rounded ></q-btn>
       </q-card-section>
       <q-card-section>
@@ -18,8 +18,8 @@
                 style="margin-bottom: 10px"
                 filled
                 v-model="name"
-                label="Ime"
-                hint="Unesite ime korisnika"
+                label="Name"
+                hint="Enter the user's name"
                 lazy-rules
                 :rules="nameRules"
                 autofocus
@@ -29,8 +29,8 @@
                 style="margin-bottom: 10px"
                 filled
                 v-model="surname"
-                label="Prezime"
-                hint="Unesite prezime korisnika"
+                label="Surname"
+                hint="Enter the user's surname"
                 lazy-rules
                 :rules="surnameRules"
               />
@@ -40,20 +40,20 @@
                 filled
                 v-model="email"
                 label="E-mail"
-                hint="Unesite e-mail korisnika"
+                hint="Enter the user's e-mail"
                 lazy-rules
                 :rules="emailRules"
               />
               <q-input
                 style="margin-bottom: 10px"
                 filled
-                label="Broj telefona*"
-                hint="Unesite broj telefona korisnika"
+                label="Phone number*"
+                hint="Enter the user's phone number"
                 v-model.trim="phoneNumber"
-                :rules="[ val => val && val.length > 0 || 'Ovo polje ne sme biti prazno!']"
+                :rules="[ val => val && val.length > 0 || 'This field cannot be empty!']"
               />
 
-              <q-input   style="margin-bottom: 10px" filled v-model="dateOfBirth" hint="Izaberite datum rođenja"  readonly>
+              <q-input   style="margin-bottom: 10px" filled v-model="dateOfBirth" hint="Select date of birth"  readonly>
                 <template v-slot:append>
                   <q-icon name="event" class="cursor-pointer" color="primary"
                   :disabled="props.mode !== 'user'"
@@ -70,17 +70,17 @@
               </q-input>
             </div>
             <div style="min-width: 300px" class="q-pa-md">
-              <q-select :readonly="props.mode === 'user'" style="margin-bottom: 10px" filled v-model="role" :options="roleOptions" label="Tip korisnika" hint="Izaberite tip korisnika" />
-              <q-select :readonly="props.mode === 'user'"   style="margin-bottom: 10px" filled v-model="league" :options="leagueOptions" label="Liga" hint="Izaberite ligu" />
-              <q-select  :readonly="props.mode === 'user'"  style="margin-bottom: 10px" filled v-model="refereeType" :options="refereeTypeOptions" label="Lista sudije" hint="Izaberite sa koje je liste sudija" />
+              <q-select :readonly="props.mode === 'user'" style="margin-bottom: 10px" filled v-model="role" :options="roleOptions" label="User type" hint="Select user type." />
+              <q-select :readonly="props.mode === 'user'"   style="margin-bottom: 10px" filled v-model="league" :options="leagueOptions" label="League" hint="Select league." />
+              <q-select  :readonly="props.mode === 'user'"  style="margin-bottom: 10px" filled v-model="refereeType" :options="refereeTypeOptions" label="Referee type" hint="Select referee type." />
               <q-input
                 v-if="props.mode==='create'"
                 style="margin-bottom: 10px"
                 filled
-                label="Lozinka*"
-                hint="Unesite lozinku"
+                label="Password*"
+                hint="Please enter your password."
                 v-model.trim="password"
-                :rules="[ val => val && val.length > 5 || 'Ovo polje mora imati minimum 5 karaktera!']"
+                :rules="[ val => val && val.length > 5 || 'This field must have a minimum of 5 characters!']"
                 :type="isPwd ? 'password' : 'text'"
               >
                 <template v-slot:append >
@@ -123,7 +123,7 @@ const userCreationDialog = ref();
 
 const userForm = ref();
 
-const buttonAction = props.mode === 'create' ? 'Kreiraj korisnika' : 'Ažuriraj korisnika'
+const buttonAction = props.mode === 'create' ? 'Create user' : 'Update user'
 
 const name = ref('');
 const surname = ref('');
@@ -132,30 +132,30 @@ const phoneNumber = ref('');
 const dateOfBirth = ref('01.01.2000');
 const password = ref('')
 
-const roleOptions = ['USER', 'FSB ADMIN'];
+const roleOptions = ['USER', 'ADMIN'];
 const role = ref(roleOptions[0]);
 
-const leagueOptions = ['MLADJE KATEGORIJE','MEDJUOPSTINSKA LIGA','PRVA BEOGRADSKA LIGA', 'ZONSKA LIGA','SRPSKA LIGA','PRVA LIGA SRBIJE', 'SUPER LIGA SRBIJE'];
+const leagueOptions = ['FIRST LEAGUE','SECOND LEAGUE','THIRD LEAGUE'];
 const league = ref(leagueOptions[0]);
 
-const refereeTypeOptions = ['SUDIJA', 'POMOĆNI SUDIJA','DELEGAT'];
+const refereeTypeOptions = ['REFEREE', 'ASSISTANT REFEREE','DELEGATE'];
 const refereeType = ref(refereeTypeOptions[0]);
 
 const nameRules = [(name: string) => new Validator(name)
-  .required('Ime korisnika je obavezno')
-  .stringMin(3, 'Ime mora imati barem 3 karaktera')
-  .stringMax(255, 'Ime može imati najviše 255 karaktera')
+  .required('Name is required')
+  .stringMin(3, 'The name must have at least 3 characters.')
+  .stringMax(255, 'The name can have a maximum of 255 characters.')
   .validate()]
 const surnameRules = [(surname: string) => new Validator(surname)
-  .required('Prezime korisnika je obavezno')
-  .stringMin(3, 'Prezime mora imati barem 3 karaktera')
-  .stringMax(255, 'Prezime može imati najviše 255 karaktera')
+  .required('Surname is required')
+  .stringMin(3, 'The surname must have at least 3 characters')
+  .stringMax(255, 'The surname can have a maximum of 255 characters.')
   .validate()]
 const emailRules = [(email: string) => new Validator(email)
-  .required('E-mail korisnika je obavezan')
-  .stringMin(3, 'E-mail  mora imati barem 3 karaktera')
-  .stringMax(255, 'E-mail  može imati najviše 255 karaktera')
-  .email('Nevalidna e-mail adresa')
+  .required('E-mail is required')
+  .stringMin(3, 'The e-mail must have at least 3 characters')
+  .stringMax(255, 'The e-mail can have a maximum of 255 characters.')
+  .email('E-mail is not valid')
   .validate()];
 
 const isPwd = ref(true)

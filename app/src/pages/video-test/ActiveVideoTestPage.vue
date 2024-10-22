@@ -16,7 +16,7 @@
           v-for="(question, index) in questions" :key="question"
           :name="index"
           :done="step > index"
-          :title="index+1 + '. Pitanje'"
+          :title="index+1 + '. Question'"
         >
             <div style="width: 100%">
               <q-item style="display: flex; justify-content: center; margin-bottom: 20px">
@@ -38,8 +38,8 @@
             </div>
             <q-separator inset/>
             <q-stepper-navigation style="text-align: right">
-              <q-btn v-if="step === questions.length-1" @click="submit" color="green" label="Završi" rounded size='lg'/>
-              <q-btn v-else @click="nextStep(index)" color="primary" label="Sledeće pitanje" rounded/>
+              <q-btn v-if="step === questions.length-1" @click="submit" color="green" label="Finish" rounded size='lg'/>
+              <q-btn v-else @click="nextStep(index)" color="primary" label="Next question" rounded/>
             </q-stepper-navigation>
 
         </q-step>
@@ -55,11 +55,11 @@
       </q-card-section>
       <q-card-section style="align-self: center; display: flex; flex-direction: column">
         <q-card-section class="text-center text-bold" style="font-size: 16px">
-          Trenutno ne postoji aktivan test!
-          Pokušajte ponovo kasnije.
+          There is no active test available.
+          Please try again later.
         </q-card-section>
         <q-card-actions style="align-self: center;">
-          <q-btn @click="reloadPage" rounded label="Pokušaj ponovo" color="primary"></q-btn>
+          <q-btn @click="reloadPage" rounded label="Try again" color="primary"></q-btn>
         </q-card-actions>
       </q-card-section>
     </q-card>
@@ -154,8 +154,8 @@ function nextStep(index: number){
 
   if(showConfirmationDialog.value) {
     $q.dialog({
-      title: 'Naredno pitanje',
-      message: 'Ukoliko odete na naredno pitanje, više se ne možete vratiti na ovo pitanje.',
+      title: 'Next question',
+      message: 'If you proceed to the next question, you will no longer be able to return to this question.',
       options: {
         type: 'checkbox',
         model: [],
@@ -214,7 +214,7 @@ function validationSuccessful(questionIndex: number){
   const answerIsNotSelected = questions.value[questionIndex].answers.every(answer => !answer.is_correct);
 
   if(answerIsNotSelected){
-    useNotificationMessage('error','Morate označiti odgovor!');
+    useNotificationMessage('error','You have to select answer!');
     return false;
   }
 

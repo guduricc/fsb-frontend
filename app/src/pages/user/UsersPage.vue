@@ -2,7 +2,7 @@
   <q-page padding>
     <q-card>
       <q-card-section>
-        <BaseHeader icon="group" title="Pregled korisnika"></BaseHeader>
+        <BaseHeader icon="group" title="Users overview"></BaseHeader>
       </q-card-section>
       <q-separator inset/>
       <q-card-section>
@@ -15,7 +15,7 @@
               @click="toggleUserCreationDialog('create')"
             >
               <BaseTooltip class="bg-green-7"
-                tooltip="Dodaj novog korisnika"
+                tooltip="Create new user"
               />
 
             </q-btn>
@@ -25,7 +25,7 @@
               borderless
               dense
               debounce="300"
-              placeholder="Pretraga"
+              placeholder="Search"
               v-model="filterTable"
             >
               <template v-slot:append>
@@ -73,7 +73,7 @@
                     color="teal-9"
                   />
                   <BaseTooltip class="bg-teal-9"
-                               tooltip="Detalji korisnika"
+                               tooltip="User details"
                   />
                 </q-btn>
               </q-td>
@@ -104,7 +104,7 @@
                     color="red"
                   />
                   <BaseTooltip class="bg-red"
-                               tooltip="Obriši korisnika"
+                               tooltip="Delete user"
                   />
                 </q-btn>
               </q-td>
@@ -182,8 +182,8 @@ function changePassword(user: User){
 
 function deleteUser(id: string){
   $q.dialog({
-    title: 'Brisanje korisnika',
-    message: 'Ukoliko obrišete ovog korisnika, on će trajno biti izbrisan iz sistema.',
+    title: 'Delete user',
+    message: 'If you delete this user, they will be permanently removed from the system.',
     persistent: true,
     ok: {
       push: true,

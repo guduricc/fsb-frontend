@@ -6,9 +6,9 @@ export default function useHandleErrors(
 ) :boolean{
   let shouldRedirectToLogin = false;
   if (errorCode === 500) {
-    useNotificationMessage('error','Došlo je do greške, molimo pokušajte ponovo, molimo kontaktirajte IT podršku!')
+    useNotificationMessage('error','An error occurred, please try again or contact IT support!')
   } else if (errorCode === 401) {
-    useNotificationMessage('error','U sistemu ne postoji korisnik sa unetim emailom i lozinkom!')
+    useNotificationMessage('error','There is no user in the system with the entered email and password!')
     shouldRedirectToLogin = true;
   } else if (errorCode === 422) {
     for (const [, value] of Object.entries(errors)) {

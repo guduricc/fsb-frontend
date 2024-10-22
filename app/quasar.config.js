@@ -91,7 +91,7 @@ module.exports = configure(function (/* ctx */) {
     framework: {
       config: {
         loading: {
-          message: 'Vaš zahtev se izvršava, molimo sačekajte.',
+          message: 'Your request is being processed, please wait.',
           spinnerSize: 160,
           messageColor: 'white',
           backgroundColor: 'bg-grey-1',

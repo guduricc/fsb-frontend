@@ -2,17 +2,17 @@
   <q-layout view="hHh lpR fFf">
     <q-header elevated class='header bg-primary'>
       <q-toolbar>
-        <q-btn  v-if="useAuthenticatedUserStore().getUser.role === 'FSB ADMIN'"
+        <q-btn  v-if="useAuthenticatedUserStore().getUser.role === 'ADMIN'"
           dense flat round icon="menu" @click="toggleLeftDrawer" />
         <q-toolbar-title>
           <q-avatar>
-            <img style="cursor:pointer" src="/images/logo.png"  @click="backToHome">
+            <img style="cursor:pointer" src="/images/cyprus_logo.png"  @click="backToHome">
           </q-avatar>
         </q-toolbar-title>
         <q-btn
           style=" margin: 10px"
           flat
-          label="Odjavi se"
+          label="Log out"
           icon="logout"
           @click="logout"
         />
@@ -21,7 +21,7 @@
     </q-header>
 
     <q-drawer
-      v-if="useAuthenticatedUserStore().getUser.role === 'FSB ADMIN'"
+      v-if="useAuthenticatedUserStore().getUser.role === 'ADMIN'"
       show-if-above v-model="leftDrawerOpen" side="left" bordered >
 
           <q-list
@@ -38,7 +38,7 @@
                 <q-icon name="group"/>
               </q-item-section>
               <q-item-section>
-                <q-item-label> Korisnici </q-item-label>
+                <q-item-label> Users </q-item-label>
               </q-item-section>
             </q-item>
             <q-item
@@ -53,7 +53,7 @@
                 <q-icon name="quiz"/>
               </q-item-section>
               <q-item-section>
-                <q-item-label> Test PFI </q-item-label>
+                <q-item-label> Theory test </q-item-label>
               </q-item-section>
             </q-item>
             <q-item
@@ -68,7 +68,7 @@
                 <q-icon name="list"/>
               </q-item-section>
               <q-item-section>
-                <q-item-label> Pregled testova PFI </q-item-label>
+                <q-item-label> Theory test overview </q-item-label>
               </q-item-section>
             </q-item>
 

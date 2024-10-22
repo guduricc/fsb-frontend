@@ -6,7 +6,7 @@ export default async function useAttemptAutoLogin() {
   const isUserSessionActive = await userStore.autoLogin();
 
   if(!isUserSessionActive){
-    useNotificationMessage(NotificationType.ERROR,'Istekla Vam je sesija, molimo ulogujte se ponovo!');
+    useNotificationMessage(NotificationType.ERROR,'Your session expired, please log in again!');
     return false
   }else{
     return true;

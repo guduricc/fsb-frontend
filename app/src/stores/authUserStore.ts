@@ -3,7 +3,6 @@ import {User} from "src/interfaces/user";
 import useNotificationMessage from "src/composables/notificationMessage";
 import {Cookies} from "quasar";
 import {api} from "boot/axios";
-import useRedirect from "src/composables/redirect";
 
 export const useAuthenticatedUserStore = defineStore('authenticatedUserStore', {
   state: () => ({
@@ -27,7 +26,7 @@ export const useAuthenticatedUserStore = defineStore('authenticatedUserStore', {
           this.setUserData(response.data.user);
           this.token = response.data.access_token;
           this.setUserCookie(response.data.access_token, response.data.user.email);
-          useNotificationMessage('success','Uspešan pristup sistemu!')
+          useNotificationMessage('success','You have successfully logged in!')
         })
 
     },
@@ -37,7 +36,7 @@ export const useAuthenticatedUserStore = defineStore('authenticatedUserStore', {
       await api
         .patch(url,{old_password:changePasswordRequest.old_password, new_password: changePasswordRequest.new_password})
         .then(()=>{
-          useNotificationMessage('success','Uspešno promenjena lozinka!')
+          useNotificationMessage('success','Password changed successfully!')
         })
     },
 

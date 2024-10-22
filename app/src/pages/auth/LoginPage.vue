@@ -4,9 +4,9 @@
       <q-card-section style="display: flex; justify-content: center; flex-direction: column"
         class="text-center no-margin"
       >
-        <q-img style="width: 80px; height: 100px; margin: 0 auto" src="/images/logo.png"></q-img>
-        <h6 style="margin: 20px 0" class="text-primary">Portal za sudije</h6>
-        <h5 style="margin: 10px 0; font-weight: bold;" class="text-primary" >Fudbalski savez Beograda</h5>
+          <q-img style="width: 105px; height: 140px; margin: 0 auto" src="/images/cyprus_logo.png"></q-img>
+        <h6 style="margin: 20px 0" class="text-primary">Football Referees Portal</h6>
+        <h5 style="margin: 10px 0; font-weight: bold;" class="text-primary" >Cyprus Football Federation</h5>
         <q-separator color="white"/>
       </q-card-section>
       <q-card-section>
@@ -17,15 +17,15 @@
           <q-input
             filled
             v-model.trim="email"
-            hint='Unesite Vaš e-mail'
+            hint='Please enter your email.'
             label="Email"
             lazy-rules
             :rules="emailRules"
           />
           <q-input
             filled
-            label='Lozinka'
-            hint='Unesite Vašu loziniku'
+            label='Password'
+            hint='Please enter your password.'
             color='black'
             :type="isPwd ? 'password' : 'text'"
             v-model.trim="password"
@@ -40,9 +40,7 @@
             </template>
           </q-input>
           <div class="button-container">
-            <q-btn class="full-width" style="margin: 20px" label='Prijavi se' type='submit' color='primary'/>
-<!--            <q-btn label='Zaboravljena lozinka?' type='button' color='primary' flat class='q-ml-sm'-->
-<!--                   @click='forgottenPassword'/>-->
+            <q-btn class="full-width" style="margin: 20px" label='Log in' type='submit' color='primary'/>
           </div>
         </q-form>
       </q-card-section>
@@ -63,11 +61,11 @@ const userStore = useAuthenticatedUserStore();
 // EMAIL INPUT START
 const email = ref('');
 
-const emailRules = [(val:string) => (val != null && val.length > 0) || 'Molimo unesite email.', isValidEmail];
+const emailRules = [(val:string) => (val != null && val.length > 0) || 'Please enter a email address.', isValidEmail];
 
 function isValidEmail (val:string) {
   const emailPattern = /^(?=[a-zA-Z0-9@._%+-]{6,254}$)[a-zA-Z0-9._%+-]{1,64}@(?:[a-zA-Z0-9-]{1,63}\.){1,8}[a-zA-Z]{2,63}$/
-  return emailPattern.test(val) || 'Molimo unesite email u ispravnom formatu.'
+  return emailPattern.test(val) || 'Please enter a valid email address.'
 }
 // EMAIL INPUT END
 // PASSWORD INPUT START
@@ -75,7 +73,7 @@ const password = ref('');
 
 const isPwd = ref(true);
 
-const passwordRules = [(val:string) => (val != null && val.length > 0) || 'Molimo unesite lozinku.']
+const passwordRules = [(val:string) => (val != null && val.length > 0) || 'Please enter a email password.']
 // PASSWORD INPUT END
 // ON SUBMIT START
 async function onSubmit(){
@@ -97,8 +95,5 @@ async function onSubmit(){
   max-width: 400px;
   margin: 0 auto;
 }
-/*.button-container{*/
-/*  display: flex;*/
-/*  justify-content: space-between;*/
-/*}*/
+
 </style>
