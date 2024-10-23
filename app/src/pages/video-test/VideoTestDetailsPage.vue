@@ -148,7 +148,7 @@ function openUpdateVideoDialog(orderId: number){
   if(index !== -1){
     answers.value = videoTest.value.answers[index].answers;
   }
-  dialogTitle.value = 'Updating question ' + orderId +
+  dialogTitle.value = 'Updating question ' + orderId;
   questionOrderId.value = orderId
 }
 

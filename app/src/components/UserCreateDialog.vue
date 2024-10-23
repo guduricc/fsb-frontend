@@ -14,7 +14,7 @@
           <div style="display: flex; justify-content: space-between; flex-wrap: wrap">
             <div style="min-width: 300px" class="q-pa-md">
               <q-input
-                :readonly="props.mode === 'user'"
+                :readonly="props.mode === 'user' && user.role === 'USER'"
                 style="margin-bottom: 10px"
                 filled
                 v-model="name"
@@ -25,7 +25,7 @@
                 autofocus
               />
               <q-input
-                :readonly="props.mode === 'user'"
+                :readonly="props.mode === 'user' && user.role === 'USER'"
                 style="margin-bottom: 10px"
                 filled
                 v-model="surname"
@@ -56,10 +56,10 @@
               <q-input   style="margin-bottom: 10px" filled v-model="dateOfBirth" hint="Select date of birth"  readonly>
                 <template v-slot:append>
                   <q-icon name="event" class="cursor-pointer" color="primary"
-                  :disabled="props.mode !== 'user'"
+
                   >
                     <q-popup-proxy  cover transition-show="scale" transition-hide="scale" >
-                      <q-date v-if="props.mode !== 'user'" v-model="dateOfBirth" mask="DD.MM.YYYY"  no-unset default-view="Years">
+                      <q-date v-if="props.mode!=='user' || user.role === 'ADMIN'" v-model="dateOfBirth" mask="DD.MM.YYYY"  no-unset default-view="Years">
                         <div class="row items-center justify-end">
                           <q-btn v-close-popup label="Ok" color="primary" flat/>
                         </div>
@@ -70,15 +70,15 @@
               </q-input>
             </div>
             <div style="min-width: 300px" class="q-pa-md">
-              <q-select :readonly="props.mode === 'user'" style="margin-bottom: 10px" filled v-model="role" :options="roleOptions" label="User type" hint="Select user type." />
-              <q-select :readonly="props.mode === 'user'"   style="margin-bottom: 10px" filled v-model="league" :options="leagueOptions" label="League" hint="Select league." />
-              <q-select  :readonly="props.mode === 'user'"  style="margin-bottom: 10px" filled v-model="refereeType" :options="refereeTypeOptions" label="Referee type" hint="Select referee type." />
+              <q-select :readonly="props.mode === 'user'" style="margin-bottom: 10px" filled v-model="role" :options="roleOptions" label="User type" hint="Select user type" />
+              <q-select :readonly="props.mode === 'user' && user.role === 'USER'"   style="margin-bottom: 10px" filled v-model="league" :options="leagueOptions" label="League" hint="Select league" />
+              <q-select  :readonly="props.mode === 'user' && user.role === 'USER'"  style="margin-bottom: 10px" filled v-model="refereeType" :options="refereeTypeOptions" label="Referee type" hint="Select referee type" />
               <q-input
                 v-if="props.mode==='create'"
                 style="margin-bottom: 10px"
                 filled
                 label="Password*"
-                hint="Please enter your password."
+                hint="Please enter user password"
                 v-model.trim="password"
                 :rules="[ val => val && val.length > 5 || 'This field must have a minimum of 5 characters!']"
                 :type="isPwd ? 'password' : 'text'"

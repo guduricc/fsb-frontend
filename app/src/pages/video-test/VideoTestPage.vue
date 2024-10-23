@@ -144,10 +144,10 @@
         </q-input>
       </q-card-section>
         <q-card-section style="min-width: 300px">
-          <q-select dense  style="max-width: 400px" filled v-model="league" multiple :options="leagueOptions" label="League" hint="Select the league for which the test is being created" />
+          <q-select dense  style="max-width: 400px" filled v-model="league" multiple :options="leagueOptions" label="League" hint="Select the league" />
         </q-card-section>
         <q-card-section style="min-width: 300px">
-          <q-select dense style="max-width: 400px" filled v-model="refereeType" multiple :options="refereeTypeOptions" label="Referee type" hint="Select referee type for which the test is being created" />
+          <q-select dense style="max-width: 400px" filled v-model="refereeType" multiple :options="refereeTypeOptions" label="Referee type" hint="Select referee type" />
         </q-card-section>
         <q-card-section>
           <q-btn class="bg-blue-grey-8 text-center text-white"

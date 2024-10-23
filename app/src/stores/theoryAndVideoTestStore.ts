@@ -169,6 +169,7 @@ export const useTheoryAndVideoTestStore = defineStore('theoryAndVideoTestStore',
 
     },
     async submitVideoTest(answers: { answer: string }[]) {
+      console.log('submit')
 
       const request = {
         test_id: this.activeVideoTest.id,
@@ -177,6 +178,7 @@ export const useTheoryAndVideoTestStore = defineStore('theoryAndVideoTestStore',
       try {
         const response = await api.post('/video-test/submit-video-test', request);
         useNotificationMessage('success', response.data.message)
+        console.log(response.data.message)
         this.activeVideoTestExist = false;
       } catch (error: any) {
         if (error.response && error.response.status === 409) {

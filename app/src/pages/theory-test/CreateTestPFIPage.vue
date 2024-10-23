@@ -9,10 +9,10 @@
               <q-card class="q-pa-md" >
                 <div style="display: flex; justify-content: flex-start; flex-wrap: wrap;">
                 <q-card-section style="min-width: 300px">
-                  <q-select style="max-width: 400px" filled v-model="league" multiple :options="leagueOptions" label="League" hint="Select the league for which the test is being created" />
+                  <q-select style="max-width: 400px" filled v-model="league" multiple :options="leagueOptions" label="League" hint="Select the league" />
                 </q-card-section>
                   <q-card-section style="min-width: 300px">
-                    <q-select style="max-width: 400px" filled v-model="refereeType" multiple :options="refereeTypeOptions" label="Referee type" hint="Select referee type for which the test is being created" />
+                    <q-select style="max-width: 400px" filled v-model="refereeType" multiple :options="refereeTypeOptions" label="Referee type" hint="Select referee type" />
                   </q-card-section>
                 <q-card-section style="min-width: 300px">
                   <q-input filled v-model="date" hint="Select the test date"  readonly>
@@ -68,7 +68,7 @@
                   v-for="(question, index) in questions" :key="question"
                 >
                   <div style="width: 100%">
-                  <span class="text-h6" style="margin-bottom: 122px">{{index+1 + '. Qusetion'}}</span>
+                  <span class="text-h6" style="margin-bottom: 122px">{{index+1 + '. Question'}}</span>
                   <q-input
                     style="margin: 10px 0; width: 100%"
                     filled

@@ -12,7 +12,7 @@
                            v-for="(question, index) in questions" :key="question"
           >
             <div style="width: 100%">
-              <span class="text-h6 text-primary" style="margin-bottom: 122px">{{index+1 + '. Qusetion'}}</span>
+              <span class="text-h6 text-primary" style="margin-bottom: 122px">{{index+1 + '. Question'}}</span>
               <q-item>
                 <span style="margin: 10px 0; width: 100%; font-size: 16px;" class="text-bold">
                 {{question.question_text}}

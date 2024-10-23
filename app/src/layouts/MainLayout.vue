@@ -6,13 +6,15 @@
           dense flat round icon="menu" @click="toggleLeftDrawer" />
         <q-toolbar-title>
           <q-avatar>
-            <img style="cursor:pointer" src="/images/cyprus_logo.png"  @click="backToHome">
+            <q-img  style="cursor: pointer" name="home" @click="backToHome" height="45px" width="36px"
+                    src="/images/cyprus_logo.png"></q-img>
+
           </q-avatar>
         </q-toolbar-title>
         <q-btn
           style=" margin: 10px"
           flat
-          label="Log out"
+          label="Logout"
           icon="logout"
           @click="logout"
         />

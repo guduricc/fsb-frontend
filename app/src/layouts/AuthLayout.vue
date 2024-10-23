@@ -4,7 +4,6 @@
     <q-header>
         <q-toolbar>
           <q-toolbar-title>
-            <q-img height="45px" width="36px" src="/images/cyprus_logo.png"></q-img>
           </q-toolbar-title>
         </q-toolbar>
     </q-header>

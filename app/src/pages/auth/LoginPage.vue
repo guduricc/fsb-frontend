@@ -4,7 +4,7 @@
       <q-card-section style="display: flex; justify-content: center; flex-direction: column"
         class="text-center no-margin"
       >
-          <q-img style="width: 105px; height: 140px; margin: 0 auto" src="/images/cyprus_logo.png"></q-img>
+          <q-img style="width: 108px; height: 140px; margin: 0 auto" src="/images/cyprus_logo.png"></q-img>
         <h6 style="margin: 20px 0" class="text-primary">Football Referees Portal</h6>
         <h5 style="margin: 10px 0; font-weight: bold;" class="text-primary" >Cyprus Football Federation</h5>
         <q-separator color="white"/>
@@ -40,7 +40,7 @@
             </template>
           </q-input>
           <div class="button-container">
-            <q-btn class="full-width" style="margin: 20px" label='Log in' type='submit' color='primary'/>
+            <q-btn  class="full-width" style="margin: 20px" label='Login' type='submit' color='primary'/>
           </div>
         </q-form>
       </q-card-section>
@@ -73,7 +73,7 @@ const password = ref('');
 
 const isPwd = ref(true);
 
-const passwordRules = [(val:string) => (val != null && val.length > 0) || 'Please enter a email password.']
+const passwordRules = [(val:string) => (val != null && val.length > 0) || 'Please enter a password.']
 // PASSWORD INPUT END
 // ON SUBMIT START
 async function onSubmit(){
@@ -92,7 +92,7 @@ async function onSubmit(){
 <style scoped>
 .my-card {
   width: 100%;
-  max-width: 400px;
+  max-width: 380px;
   margin: 0 auto;
 }
 

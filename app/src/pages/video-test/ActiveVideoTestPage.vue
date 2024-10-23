@@ -76,6 +76,7 @@ import {computed, ref} from "vue";
 import BaseHeader from 'src/components/BaseHeader.vue'
 import useNotificationMessage from "src/composables/notificationMessage";
 import {test} from "vitest";
+import useRedirect from "src/composables/redirect";
 
 const $q = useQuasar();
 const router = useRouter();
@@ -160,7 +161,7 @@ function nextStep(index: number){
         type: 'checkbox',
         model: [],
         items: [
-          {label: 'Ne prikazuj ovaj dialog više', value: '1', color: 'secondary'},
+          {label: `Don't show this dialog again.`, value: '1', color: 'secondary'},
         ]
       },
       persistent: true,
@@ -203,10 +204,9 @@ async function submit(){
   })
 
   await videoTestStore.submitVideoTest(testAnswers);
-  await router.push({
-    name: 'home'
-  })
-  location.reload();
+
+  useRedirect(router, 'home', 'replace')
+
 }
 
 function validationSuccessful(questionIndex: number){
